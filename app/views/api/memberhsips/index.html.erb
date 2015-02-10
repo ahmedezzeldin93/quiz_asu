@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Memberhsips</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @memberhsips.each do |memberhsip| %>
+      <tr>
+        <td><%= memberhsip.status %></td>
+        <td><%= link_to 'Show', memberhsip %></td>
+        <td><%= link_to 'Edit', edit_memberhsip_path(memberhsip) %></td>
+        <td><%= link_to 'Destroy', memberhsip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Memberhsip', new_memberhsip_path %>
