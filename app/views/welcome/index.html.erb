@@ -1,3 +1,37 @@
 <h1>Quiz ASU API</h1>
 <h2>Here Will be the documentation for public</h2>
 <hr/>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+</style>
+
+<h3>Users Authentication<h3></hr>
+
+<table style="width:100%">
+<tr>
+  	<th>Purpose</th>
+  	<th>HTTP Method</th>
+  	<th>URL</th>
+  	<th>example</th>
+</tr>
+
+<tr>
+    <td>register</td> 
+    <td>POST</td> 
+    <td>https://quiz-asu.herokuapp.com/api/users/registrations(.:format) </td> 
+    <td>
+    	{"user": </br>
+    			{"email":"test1@gmail.com",</br>
+    			 "username":"test1",</br>
+    			 "password":"12345678",</br>
+    			 "type":"Instructor"}</br>
+    	}</br>
+    </td>
+</tr>
