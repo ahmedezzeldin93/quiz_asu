@@ -19,11 +19,12 @@ th, td {
   	<th>Purpose</th>
   	<th>HTTP Method</th>
   	<th>URL</th>
-  	<th>example</th>
+  	<th>request example</th>
+    <th>response example</th>
 </tr>
 
 <tr>
-    <td>register</td> 
+    <td>register </br> /sign up</td> 
     <td>POST</td> 
     <td>https://quiz-asu.herokuapp.com/api/users/registrations(.:format) </td> 
     <td>
@@ -33,5 +34,55 @@ th, td {
     			 "password":"12345678",</br>
     			 "type":"Instructor"}</br>
     	}</br>
+    </td>
+    <td>
+       {"success":true,</br>
+       "info":"Registered",</br>
+       "data":{"user":{"id":7,</br>
+       "username":"test6",</br>
+       "email":"test6@gmail.com",</br>
+       "authentication_token":"3jhn-jUE5XRYZwkn1xkk",</br>
+       "created_at":"2015-02-11T00:18:15.572Z",</br>
+       "updated_at":"2015-02-11T00:18:15.619Z"},</br>
+       "auth_token":"3jhn-jUE5XRYZwkn1xkk"}}</br>
+    </td>
+</tr>
+
+<tr>
+    <td>login</br> /session create</td> 
+    <td>POST</td> 
+    <td>https://quiz-asu.herokuapp.com/api/users/sessions(.:format) </td> 
+    <td>
+      {"user": </br>
+          {"email":"test1@gmail.com",</br>
+           "username":"test1",</br>
+           "password":"12345678",</br>
+           "type":"Instructor"}</br>
+      }</br>
+    </td>
+    <td>
+      {"success":true,</br>
+      "info":"Logged in",</br>
+      "data":{"auth_token":"d_ngp6vmx_LRLC98FwDx",</br>
+              "type":"Student"}</br>
+      }</br>
+    </td>
+</tr>
+
+<tr>
+    <td>logout</br> /session delete</td> 
+    <td>DELETE</td> 
+    <td>https://quiz-asu.herokuapp.com/api/users/sessions(.:format) </td> 
+    <td>
+      {"user": </br>
+          {"email":"test1@gmail.com",</br>
+           "username":"test1",</br>
+           "password":"12345678",</br>
+           "type":"Instructor"}</br>
+      }</br>
+    </td>
+    <td>
+      Status 204 </br>
+      no content
     </td>
 </tr>
