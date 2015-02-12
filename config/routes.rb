@@ -13,9 +13,9 @@ Rails.application.routes.draw do
       delete 'sessions' => 'sessions#destroy', :as => 'logout'
     end
     resources :users
-    resources :answers
-    resources :questions
     resources :quizzes
+    resources :answers
+    resources :questions  
     resources :groups
     resources :memberhsips
   end

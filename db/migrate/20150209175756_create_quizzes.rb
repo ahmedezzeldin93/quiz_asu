@@ -6,7 +6,7 @@ class CreateQuizzes < ActiveRecord::Migration
       t.string :title
       t.string :subject
       t.string :description
-      t.integer :mark
+      t.integer :total_score
       t.date :date_to_publish
       t.time :time_to_publish
       t.boolean :status

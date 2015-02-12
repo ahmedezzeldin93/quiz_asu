@@ -86,3 +86,141 @@ th, td {
       no content
     </td>
 </tr>
+
+
+</table>
+
+<h3>Quizzes Create/show <h3></hr>
+<table style="width:100%">
+<tr>
+    <th>Purpose</th>
+    <th>HTTP Method</th>
+    <th>URL</th>
+    <th>request example</th>
+    <th>response example</th>
+</tr>
+
+<tr>
+    <td>index/show a list of quizzes </br> related to an instructor</td> 
+    <td>GET</td> 
+    <td>https://quiz-asu.herokuapp.com/api/quizzes(.:format) </td> 
+    <td>
+        GET Method together with auth_token and instructor_id as a URL parameter </br></br>
+        https://quiz-asu.herokuapp.com/api/quizzes.json?
+        auth_token=dngp6vmx_LRLC98FwDx&instructor_id=1
+    </td>
+    <td>
+      [{"id":1,"title":"quiz1","subject":"co"},</br>
+      {"id":2,"title":"quiz2","subject":"co"}]
+    </td>
+</tr>
+
+<tr>
+    <td>create a quizzes </br> related to an instructor</td> 
+    <td>POST</td> 
+    <td>https://quiz-asu.herokuapp.com/api/quizzes(.:format) </td> 
+    <td>
+        {"quiz":</br>
+        {"title":"quiz7",</br>
+        "subject":"co",</br>
+        "instructor_id":3}</br>
+        }</br>
+    </td>
+    <td>
+      {"id":7,"title":"quiz7","subject":"co","description":null,</br>
+      "total_score":null,"status":null,"instructor_id":3,</br>
+      "created_at":"2015-02-12T01:56:36.108Z",</br>
+      "updated_at":"2015-02-12T01:56:36.108Z"}</br>
+    </td>
+</tr>
+</table>
+
+</table>
+
+<h3>question Create/show <h3></hr>
+<table style="width:100%">
+<tr>
+    <th>Purpose</th>
+    <th>HTTP Method</th>
+    <th>URL</th>
+    <th>request example</th>
+    <th>response example</th>
+</tr>
+
+<tr>
+    <td>index/show a list of question</br> related to a quiz</td> 
+    <td>GET</td> 
+    <td>https://quiz-asu.herokuapp.com/api/questions(.:format) </td> 
+    <td>
+        GET Method together with auth_token and quiz_id as a URL parameter </br></br>
+        https://quiz-asu.herokuapp.com/api/questions.json?
+        auth_token=dngp6vmx_LRLC98FwDx&quiz_id=1
+    </td>
+    <td>
+      [{"id":1,"title":"sjadnasjndja?"},</br>
+      {"id":2,"title":"sadsadasdasd?"}]
+    </td>
+</tr>
+
+<tr>
+    <td>create a question</br> related to a quiz</td> 
+    <td>POST</td> 
+    <td>https://quiz-asu.herokuapp.com/api/questions(.:format) </td> 
+    <td>
+        {"question":</br>
+        {"title":"ay so2al?",</br>
+        "quiz_id":1}</br>
+        }</br>
+    </td>
+    <td>
+      {"id":6,"title":"ay so2al?",</br>
+      "quiz_id":3,</br>
+      "created_at":"2015-02-12T01:56:36.108Z",</br>
+      "updated_at":"2015-02-12T01:56:36.108Z"}</br>
+    </td>
+</tr>
+</table>
+
+<h3>Answer Create/show <h3></hr>
+<table style="width:100%">
+<tr>
+    <th>Purpose</th>
+    <th>HTTP Method</th>
+    <th>URL</th>
+    <th>request example</th>
+    <th>response example</th>
+</tr>
+
+<tr>
+    <td>index/show a list of answers</br> related to a questions</td> 
+    <td>GET</td> 
+    <td>https://quiz-asu.herokuapp.com/api/answers(.:format) </td> 
+    <td>
+        GET Method together with auth_token and question_id as a URL parameter </br></br>
+        https://quiz-asu.herokuapp.com/api/questions.json?
+        auth_token=dngp6vmx_LRLC98FwDx&question_id=1
+    </td>
+    <td
+      [{"id":1,"title":"egaba1"},</br>
+      {"id":2,"title":"egaba 2"}]
+    </td>
+</tr>
+
+<tr>
+    <td>create an answer</br> related to a question</td> 
+    <td>POST</td> 
+    <td>https://quiz-asu.herokuapp.com/api/answers(.:format) </td> 
+    <td>
+        {"answer":</br>
+        {"title":"ay egaba",</br>
+        "question_id":1}</br>
+        }</br>
+    </td>
+    <td>
+      {"id":3,"title":"ay egaba",</br>
+      "question_id":1,</br>
+      "created_at":"2015-02-12T01:56:36.108Z",</br>
+      "updated_at":"2015-02-12T01:56:36.108Z"}</br>
+    </td>
+</tr>
+</table>

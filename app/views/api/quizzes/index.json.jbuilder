@@ -1,4 +1,3 @@
 json.array!(@quizzes) do |quiz|
-  json.extract! quiz, :id, :title, :subject, :description, :mark, :date, :time, :status
-  json.url quiz_url(quiz, format: :json)
+  json.extract! quiz, :id, :title, :subject
 end

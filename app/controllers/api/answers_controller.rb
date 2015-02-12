@@ -6,7 +6,7 @@ class AnswersController < ApplicationController
   # GET /answers
   # GET /answers.json
   def index
-    @answers = Answer.all
+    @answers = Answer.where("question_id IN (?)", params[:question_id]) if params[:question_id].present?
   end
 
   # GET /answers/1
@@ -31,7 +31,7 @@ class AnswersController < ApplicationController
     respond_to do |format|
       if @answer.save
         format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.json { render :show, status: :created, location: @answer }
+        format.json { render :show, status: :created}
       else
         format.html { render :new }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
@@ -71,7 +71,7 @@ class AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:title)
+      params.require(:answer).permit(:title, :question_id)
     end
 end
 end

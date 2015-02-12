@@ -2,12 +2,13 @@ module API
 class QuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
+  respond_to :json
 
   # GET /quizzes
   # GET /quizzes.json
   def index
-    @quizzes = Quiz.all
-  end
+      @quizzes = Quiz.where("instructor_id IN (?)", params[:instructor_id]) if params[:instructor_id].present?
+    end
 
   # GET /quizzes/1
   # GET /quizzes/1.json
@@ -31,7 +32,7 @@ class QuizzesController < ApplicationController
     respond_to do |format|
       if @quiz.save
         format.html { redirect_to @quiz, notice: 'Quiz was successfully created.' }
-        format.json { render :show, status: :created, location: @quiz }
+        format.json { render :show, status: :created}
       else
         format.html { render :new }
         format.json { render json: @quiz.errors, status: :unprocessable_entity }
@@ -71,7 +72,7 @@ class QuizzesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
-      params.require(:quiz).permit(:title, :subject, :description, :mark, :date, :time, :status)
+      params.require(:quiz).permit(:title, :subject, :description, :total_score, :instructor_id)
     end
 end
 end

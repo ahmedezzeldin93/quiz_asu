@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.where("quiz_id IN (?)", params[:quiz_id]) if params[:quiz_id].present?
   end
 
   # GET /questions/1
@@ -31,7 +31,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
+        format.json { render :show, status: :created }
       else
         format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -45,7 +45,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
+        format.json { render :show, status: :ok}
       else
         format.html { render :edit }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -71,7 +71,7 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:title)
+      params.require(:question).permit(:title, :quiz_id, :answer_id, :right_answer_id)
     end
 end
 end
