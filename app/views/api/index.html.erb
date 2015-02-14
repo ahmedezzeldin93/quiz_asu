@@ -87,7 +87,6 @@ th, td {
     </td>
 </tr>
 
-
 </table>
 <h2>Instructor admin panel<h2></hr>
 <h3>Quizzes Manager<h3></hr>
@@ -135,7 +134,7 @@ th, td {
 </tr>
 
 <tr>
-  <td>update/</br>publish quiz</td>
+  <td>update/publish quiz</td>
   <td>PATCH/PUT</td>
   <td>https://quiz-asu.herokuapp.com/api/quizzes/:id(.:format)</td>
   <td>{"quiz":{"group_id":2, "date_to_publish":"1999-01-08",</br>
@@ -150,7 +149,6 @@ th, td {
 </tr>
 
 </table>
-
 
 <h3>question Create/show <h3></hr>
 <table style="width:100%">
@@ -212,7 +210,7 @@ th, td {
     <td>https://quiz-asu.herokuapp.com/api/answers(.:format) </td> 
     <td>
         GET Method together with auth_token and question_id as a URL parameter </br></br>
-        https://quiz-asu.herokuapp.com/api/answers.json?
+        https://quiz-asu.herokuapp.com/api/questions.json?
         auth_token=dngp6vmx_LRLC98FwDx&question_id=1
     </td>
     <td
@@ -228,13 +226,12 @@ th, td {
     <td>
         {"answer":</br>
         {"title":"ay egaba",</br>
-        "question_id":1,}</br>
-        "correctness":false}</br>
+        "question_id":1}</br>
+        }</br>
     </td>
     <td>
       {"id":3,"title":"ay egaba",</br>
       "question_id":1,</br>
-      "correctness":false,</br>
       "created_at":"2015-02-12T01:56:36.108Z",</br>
       "updated_at":"2015-02-12T01:56:36.108Z"}</br>
     </td>
@@ -257,123 +254,4 @@ th, td {
       "updated_at":"2015-02-12T01:56:36.108Z"}</br>
     </td>
 </tr>
-</table>
-
-<h3>Groups Manager<h3></hr>
-<table style="width:100%">
-<tr>
-    <th>Purpose</th>
-    <th>HTTP Method</th>
-    <th>URL</th>
-    <th>request example</th>
-    <th>response example</th>
-</tr>
-
-<tr>
-    <td>index/show a list of groups </br> related to an instructor</td> 
-    <td>GET</td> 
-    <td>https://quiz-asu.herokuapp.com/api/groups(.:format) </td> 
-    <td>
-        GET Method together with auth_token and instructor_id as a URL parameter </br></br>
-        https://quiz-asu.herokuapp.com/api/groups.json?</br>
-        auth_token=dngp6vmx_LRLC98FwDx&instructor_id=1</br>
-    </td>
-    <td>
-      [{"id":1,"group_name":"CSS12","description":null,"number_of_students":100}]
-    </td>
-</tr>
-
-<tr>
-    <td>create a groups </br> related to an instructor</td> 
-    <td>POST</td> 
-    <td>https://quiz-asu.herokuapp.com/api/groups(.:format) </td> 
-    <td>
-        {"group":{</br>
-        "group_name":"CSS12",</br>
-        "number_of_students":100,</br>
-        "description":"ay kalam",</br>
-        "instructor_id":1}}</br>
-    </td>
-    <td>
-      {"id":1,"group_name":"CSS12",</br>
-      "description":null,"number_of_students":100,</br>"created_at":"2015-02-14T18:51:35.749Z",</br>"updated_at":"2015-02-14T18:51:35.749Z","instructor_id":1}
-    </td>
-</tr>
-
-</table>
-
-
-<h2>Student admin panel<h2></hr>
-<h3>Groups Manager<h3></hr>
-<table style="width:100%">
-<tr>
-    <th>Purpose</th>
-    <th>HTTP Method</th>
-    <th>URL</th>
-    <th>request example</th>
-    <th>response example</th>
-</tr>
-
-<tr>
-    <td>index/show all groups </td> 
-    <td>GET</td> 
-    <td>https://quiz-asu.herokuapp.com/api/groups(.:format) </td> 
-    <td>
-        GET Method together with auth_token and student_id as a URL parameter </br></br>
-        https://quiz-asu.herokuapp.com/api/groups.json?</br>
-        auth_token=dngp6vmx_LRLC98FwDx&student_id=1</br>
-    </td>
-    <td>
-      [{"id":1,"group_name":"CSS12",</br>"description":null,"number_of_students":100}]
-    </td>
-</tr>
-
-<tr>
-    <td>index/show all memberships</br> JOINED groups </td> 
-    <td>GET</td> 
-    <td>https://quiz-asu.herokuapp.com/api/memberships(.:format) </td> 
-    <td>
-    http://localhost:3000/api/memberships.json?</br>auth_token=2o6vThR58T1_5X662sWv&student_id=3
-    </td>
-    <td>
-      [{"id":1,"group_name":"CSS12",</br>"description":null,"number_of_students":100}]
-    </td>
-</tr>
-
-
-<tr>
-    <td>create membership/join group</td> 
-    <td>POST</td> 
-    <td>https://quiz-asu.herokuapp.com/api/memberships(.:format)</td> 
-    <td>
-        http://localhost:3000/api/memberships.json?</br>auth_token=2o6vThR58T1_5X662sWv</br></br>
-        {"membership":{</br>
-          "student_id":3,</br>
-          "group_id":1,</br>
-          "status":true}}</br>
-    </td>
-    <td>
-      {"id":2,"status":true,</br>"created_at":"2015-02-14T17:47:52.053Z",</br>
-      "updated_at":"2015-02-14T17:47:52.053Z"}</br>
-    </td>
-</tr>
-
-
-<tr>
-    <td>update membership/</br>leave or join group</td> 
-    <td>PATCH/PUT</td> 
-    <td>https://quiz-asu.herokuapp.com/api/membership/:id(.:format)</td> 
-    <td>
-        http://localhost:3000/api/memberships/3.json?</br>auth_token=2o6vThR58T1_5X662sWv</br></br>
-        {"membership":{</br>
-          "student_id":3,</br>
-          "group_id":1,</br>
-          "status":false}}</br>
-    </td>
-    <td>
-      {"id":2,"status":false,</br>"created_at":"2015-02-14T17:47:52.053Z",</br>
-      "updated_at":"2015-02-14T17:47:52.053Z"}</br>
-    </td>
-</tr>
-
 </table>

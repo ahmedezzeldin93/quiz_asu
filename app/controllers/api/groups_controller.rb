@@ -6,7 +6,8 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.where("instructor_id IN (?)", params[:instructor_id]) if params[:instructor_id].present?
+    @groups = Group.all if params[:student_id].present?
   end
 
   # GET /groups/1
@@ -31,7 +32,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
-        format.json { render :show, status: :created, location: @group }
+        format.json { render :show, status: :created}
       else
         format.html { render :new }
         format.json { render json: @group.errors, status: :unprocessable_entity }
@@ -45,7 +46,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
-        format.json { render :show, status: :ok, location: @group }
+        format.json { render :show, status: :ok}
       else
         format.html { render :edit }
         format.json { render json: @group.errors, status: :unprocessable_entity }
@@ -71,7 +72,7 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:group_name, :description, :number_of_students)
+      params.require(:group).permit(:group_name, :description, :number_of_students, :instructor_id)
     end
 end
 end

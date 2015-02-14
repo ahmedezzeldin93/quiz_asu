@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212013403) do
+ActiveRecord::Schema.define(version: 20150213235436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,20 +19,31 @@ ActiveRecord::Schema.define(version: 20150212013403) do
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
     t.string   "title"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "correctness", default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "quiz_id"
+    t.integer  "score"
+    t.string   "summary"
+    t.boolean  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "groups", force: :cascade do |t|
-    t.integer  "instructor_id"
-    t.string   "group_name"
+    t.integer  "instructor_id",      null: false
+    t.string   "group_name",         null: false
     t.string   "description"
     t.integer  "number_of_students"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
 
-  create_table "memberhsips", force: :cascade do |t|
+  create_table "memberships", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "group_id"
     t.boolean  "status"
@@ -41,8 +52,7 @@ ActiveRecord::Schema.define(version: 20150212013403) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer  "quiz_id"
-    t.integer  "answer_id"
+    t.integer  "quiz_id",         null: false
     t.integer  "right_answer_id"
     t.string   "title"
     t.datetime "created_at",      null: false
@@ -50,17 +60,18 @@ ActiveRecord::Schema.define(version: 20150212013403) do
   end
 
   create_table "quizzes", force: :cascade do |t|
-    t.integer  "instructor_id"
+    t.integer  "instructor_id",                   null: false
     t.integer  "group_id"
-    t.string   "title"
+    t.string   "title",                           null: false
     t.string   "subject"
     t.string   "description"
     t.integer  "total_score"
     t.date     "date_to_publish"
     t.time     "time_to_publish"
-    t.boolean  "status"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.boolean  "status",          default: false
+    t.integer  "duration"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "right_answers", force: :cascade do |t|

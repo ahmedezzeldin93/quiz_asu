@@ -9,15 +9,16 @@ Rails.application.routes.draw do
   namespace :api do
     devise_scope :user do
       post 'users/registrations' => 'registrations#create', :as => 'register'
-      post 'sessions' => 'sessions#create', :as => 'login'
-      delete 'sessions' => 'sessions#destroy', :as => 'logout'
+      post 'users/sessions' => 'sessions#create', :as => 'login'
+      delete 'users/sessions' => 'sessions#destroy', :as => 'logout'
     end
     resources :users
     resources :quizzes
+    resources :assignments
     resources :answers
     resources :questions  
     resources :groups
-    resources :memberhsips
+    resources :memberships
   end
 
 end

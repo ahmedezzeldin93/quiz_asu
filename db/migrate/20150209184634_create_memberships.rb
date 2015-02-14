@@ -1,6 +1,6 @@
-class CreateMemberhsips < ActiveRecord::Migration
+class CreateMemberships < ActiveRecord::Migration
   def change
-    create_table :memberhsips do |t|
+    create_table :memberships do |t|
       t.integer :student_id
       t.integer :group_id
       t.boolean :status

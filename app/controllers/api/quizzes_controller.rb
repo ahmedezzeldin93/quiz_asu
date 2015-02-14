@@ -7,8 +7,16 @@ class QuizzesController < ApplicationController
   # GET /quizzes
   # GET /quizzes.json
   def index
-      @quizzes = Quiz.where("instructor_id IN (?)", params[:instructor_id]) if params[:instructor_id].present?
+    if params[:instructor_id].present?
+      @quizzes = Quiz.where("instructor_id IN (?)", params[:instructor_id]) 
     end
+    if params[:student_id].present?
+      @quizzes = Array.new
+      Group.memberships.where("student_id IN (?)", params[:student_id]).each do |group|
+      @quizzes << group
+      end
+    end
+  end
 
   # GET /quizzes/1
   # GET /quizzes/1.json
@@ -46,7 +54,7 @@ class QuizzesController < ApplicationController
     respond_to do |format|
       if @quiz.update(quiz_params)
         format.html { redirect_to @quiz, notice: 'Quiz was successfully updated.' }
-        format.json { render :show, status: :ok, location: @quiz }
+        format.json { render :show, status: :ok}
       else
         format.html { render :edit }
         format.json { render json: @quiz.errors, status: :unprocessable_entity }
@@ -72,7 +80,7 @@ class QuizzesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
-      params.require(:quiz).permit(:title, :subject, :description, :total_score, :instructor_id)
+      params.require(:quiz).permit(:title, :subject, :description, :total_score, :instructor_id, :group_id,:date_to_publish, :time_to_publish)
     end
 end
 end
