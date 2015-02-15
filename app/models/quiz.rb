@@ -12,12 +12,5 @@ class Quiz < ActiveRecord::Base
 	validates_presence_of :title
 	validates_presence_of :total_score
 
-
-	##Methodes
-	#def render_quiz_all(options={ })
-	#	as_json(:only => [:id, :title, :subject, :year, :description, :marks, :created_ar],
-	#			:include => {:questions => {:on ly => [:id, :title]}}
-	#			)
-	#end
-
+	scope :published,-> { where(status: true) }
 end

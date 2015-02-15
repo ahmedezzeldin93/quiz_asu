@@ -8,7 +8,7 @@ class AssignmentsController < ApplicationController
   def index
     if params[:student_id].present?
       student = Student.find_by_id(params[:student_id])
-      @assignments = student.quizzes
+      @quizzes = student.quizzes.published
     end
   end
 

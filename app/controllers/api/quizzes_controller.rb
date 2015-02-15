@@ -10,17 +10,18 @@ class QuizzesController < ApplicationController
     if params[:instructor_id].present?
       @quizzes = Quiz.where("instructor_id IN (?)", params[:instructor_id]) 
     end
-    if params[:student_id].present?
-      @quizzes = Array.new
-      Group.memberships.where("student_id IN (?)", params[:student_id]).each do |group|
-      @quizzes << group
-      end
+    if params[:group_id].present?
+      group = Group.find_by_id(params[:group_id])
+      @quizzes = group.quizzes
     end
   end
 
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
+    @quiz=Quiz.find(params[:id])
+    render json: @quiz.as_json(:only => [:id, :title, :subject,:description, :total_mark],
+        :include => {:questions => {:only => [:id, :title],:methods => [:add_answers]},})
   end
 
   # GET /quizzes/new
@@ -52,7 +53,16 @@ class QuizzesController < ApplicationController
   # PATCH/PUT /quizzes/1.json
   def update
     respond_to do |format|
+      
       if @quiz.update(quiz_params)
+        id_of_assigned_group = @quiz.group_id
+        assigned_group = Group.find_by_id(id_of_assigned_group)
+        @memberships = assigned_group.memberships
+        @memberships.each do |mem|
+          id_of_assigned_student = mem.student_id
+          @assignment = Assignment.create(:student_id =>id_of_assigned_student,:quiz_id=>@quiz.id, :status=>true)
+        end
+
         format.html { redirect_to @quiz, notice: 'Quiz was successfully updated.' }
         format.json { render :show, status: :ok}
       else
@@ -80,7 +90,7 @@ class QuizzesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
-      params.require(:quiz).permit(:title, :subject, :description, :total_score, :instructor_id, :group_id,:date_to_publish, :time_to_publish)
+      params.require(:quiz).permit(:title, :subject, :description, :total_score, :instructor_id,:status,:group_id,:date_to_publish, :time_to_publish, :duration)
     end
 end
 end

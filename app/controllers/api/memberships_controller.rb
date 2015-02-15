@@ -30,6 +30,11 @@ class MembershipsController < ApplicationController
   # POST /memberships.json
   def create
     @membership = Membership.new(membership_params)
+    mem = Membership.where("student_id = ? AND group_id = ?", params[:student_id], params[:group_id] )
+    if mem.empty?
+      quiz = Quiz.find_by_group_id(params[:group_id])
+      @assignment = Assignment.create(:student_id =>params[:student_id],:quiz_id=>quiz.id, :status=>true)
+    end
 
     respond_to do |format|
       if @membership.save
@@ -76,5 +81,6 @@ class MembershipsController < ApplicationController
     def membership_params
       params.require(:membership).permit(:group_id ,:status, :student_id)
     end
+
 end
 end

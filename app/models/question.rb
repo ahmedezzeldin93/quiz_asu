@@ -13,8 +13,8 @@ class Question < ActiveRecord::Base
    	validates_presence_of :title
 
    	##Methodes
-	def add_right_answer_to_answers
-		self.answers << right_asnwer
-	end
+      def add_answers
+         self.answers.select("id, title, correctness").shuffle
+      end
 	
 end

@@ -116,6 +116,19 @@ th, td {
 </tr>
 
 <tr>
+    <td>show all quizzes related to a specific group</td> 
+    <td>GET</td> 
+    <td>https://quiz-asu.herokuapp.com/api/quizzes(.:format)</td> 
+    <td>
+        https://quiz-asu.herokuapp.com/api/quizzes.json?</br>
+        auth_token=dngp6vmx_LRLC98FwDx&instructor_id=2&group_id=4
+    </td>
+    <td>
+      [{"id":3,"title":"gededed","subject":"sho3'l 3ale"}]
+    </td>
+</tr>
+
+<tr>
     <td>create a quizzes </br> related to an instructor</td> 
     <td>POST</td> 
     <td>https://quiz-asu.herokuapp.com/api/quizzes(.:format) </td> 
@@ -360,9 +373,22 @@ th, td {
 
 
 <tr>
-    <td>update membership/</br>leave or join group</td> 
+    <td>delete membership </br> leave group</td> 
+    <td>DELETE</td> 
+    <td>https://quiz-asu.herokuapp.com/api/memberships/:id(.:format)</td> 
+    <td>
+      https://quiz-asu.herokuapp.com/api/memberships/1.json
+    </td>
+    <td>
+      status 204 no content
+    </td>
+</tr>
+
+
+<tr>
+    <td>update membership/</br> not stable now</td> 
     <td>PATCH/PUT</td> 
-    <td>https://quiz-asu.herokuapp.com/api/membership/:id(.:format)</td> 
+    <td>https://quiz-asu.herokuapp.com/api/memberships/:id(.:format)</td> 
     <td>
         http://localhost:3000/api/memberships/3.json?</br>auth_token=2o6vThR58T1_5X662sWv</br></br>
         {"membership":{</br>
@@ -373,6 +399,57 @@ th, td {
     <td>
       {"id":2,"status":false,</br>"created_at":"2015-02-14T17:47:52.053Z",</br>
       "updated_at":"2015-02-14T17:47:52.053Z"}</br>
+    </td>
+</tr>
+
+</table>
+
+
+
+<h3>Quizzes Manager<h3></hr>
+<table style="width:100%">
+<tr>
+    <th>Purpose</th>
+    <th>HTTP Method</th>
+    <th>URL</th>
+    <th>request example</th>
+    <th>response example</th>
+</tr>
+
+<tr>
+    <td>index/show all assignments</br> my quizzes </td> 
+    <td>GET</td> 
+    <td>https://quiz-asu.herokuapp.com/api/assignments(.:format) </td> 
+    <td>
+        http://localhost:3000/api/assignments.json?</br>auth_token=xhFviKcEGdFfFV4kkaiD&student_id=3
+    </td>
+    <td>
+      [{"id":3,"title":"gededed","status":true,"subject":"sho3'l </br>3ale","description":null,"total_score":5,</br>"date_to_publish":"1999-01-08","time_to_publish":"2000-01-01T04:05:06.</br>000Z","duration":null},</br>{"id":3,"title":"gededed","status":true,"subject":"sho3'l </br>3ale","description":null,</br>"total_score":5,"date_to_publish":"1999-01-08",</br>"time_to_publish":"2000-01-01T04:05:06.000Z","duration":null}]
+    </td>
+</tr>
+
+<tr>
+    <td>retrieve quiz/ questions/answers</br> take quiz </td> 
+    <td>GET</td> 
+    <td>https://quiz-asu.herokuapp.com/api/quizzes/:id(.:format)</td> 
+    <td>
+    http://localhost:3000/api/quizzes/1.json?</br>auth_token=mozpG7bDozJmcda7P_Z4
+    </td>
+    <td>
+      {"id":1,"title":"projectswt","subject":"software",</br>"description":null,"questions":[{"id":1,"title":"ay so2al?",</br>"add_answers":[{"id":1,"title":"ay ekaba?","correctness":false},</br>{"id":4,"title":"ay ekabaawqa","correctness":false},</br>{"id":2,"title":"ay ekabaaa","correctness":false},</br>{"id":3,"title":"ay ekabaaa","correctness":true}]},</br>{"id":2,"title":"ay so2al2?","add_answers":[]},</br>{"id":3,"title":"ay so2al3?","add_answers":[]},</br>{"id":4,"title":"ay so2al4?","add_answers":[]},</br>{"id":5,"title":"ay so2al5?","add_answers":[]}]}
+    </td>
+</tr>
+
+
+<tr>
+    <td>post all answers of a quiz</td> 
+    <td>POST</td> 
+    <td>https://quiz-asu.herokuapp.com/api/students_answers(.:format)</td> 
+    <td>
+        
+    </td>
+    <td>
+
     </td>
 </tr>
 
