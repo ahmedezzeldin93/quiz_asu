@@ -359,15 +359,20 @@ th, td {
     <td>POST</td> 
     <td>https://quiz-asu.herokuapp.com/api/memberships(.:format)</td> 
     <td>
-        http://localhost:3000/api/memberships.json?</br>auth_token=2o6vThR58T1_5X662sWv</br></br>
+        http://localhost:3000/api/memberships.json?
+      </br>auth_token=2o6vThR58T1_5X662sWv&group_id=1&student_id=3</br></br>
         {"membership":{</br>
           "student_id":3,</br>
           "group_id":1,</br>
           "status":true}}</br>
     </td>
     <td>
+      if okay</br>
       {"id":2,"status":true,</br>"created_at":"2015-02-14T17:47:52.053Z",</br>
       "updated_at":"2015-02-14T17:47:52.053Z"}</br>
+      </br></br>
+      if already you are a member in this group
+      422 unprocessable entity
     </td>
 </tr>
 

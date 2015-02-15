@@ -33,17 +33,20 @@ class MembershipsController < ApplicationController
     mem = Membership.where("student_id = ? AND group_id = ?", params[:student_id], params[:group_id] )
     if mem.empty?
       quiz = Quiz.find_by_group_id(params[:group_id])
+      if quiz != nil
       @assignment = Assignment.create(:student_id =>params[:student_id],:quiz_id=>quiz.id, :status=>true)
-    end
-
-    respond_to do |format|
-      if @membership.save
-        format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
-        format.json { render :show, status: :created}
-      else
-        format.html { render :new }
-        format.json { render json: @membership.errors, status: :unprocessable_entity }
       end
+      respond_to do |format|
+        if @membership.save
+          format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
+          format.json { render :show, status: :created}
+        else
+          format.html { render :new }
+          format.json { render json: @membership.errors, status: :unprocessable_entity }
+        end
+      end
+    else  
+        render json: @membership.errors, status: :unprocessable_entity
     end
   end
 
